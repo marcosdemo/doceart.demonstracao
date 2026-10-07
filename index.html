@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoceArt | O Universo dos Doces e Confeitaria</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#3b82f6', // Tailwind blue-500
+                            darkBlue: '#1d4ed8', // Tailwind blue-700
+                            yellow: '#fbbf24', // Tailwind amber-400
+                            lightYellow: '#fde68a', // Tailwind amber-200
+                        }
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-yellow selection:text-slate-900">
+
+    <header class="fixed w-full top-0 z-50 glass transition-all duration-300" id="header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-cake-candles text-brand-blue text-2xl mr-2"></i>
+                    <span class="font-heading font-bold text-3xl tracking-tight text-slate-900">Doce<span class="text-brand-blue">Art</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#produtos" class="text-slate-600 hover:text-brand-blue font-medium transition-colors">Produtos</a>
+                    <a href="#marcas" class="text-slate-600 hover:text-brand-blue font-medium transition-colors">Marcas</a>
+                    <a href="#facilidades" class="text-slate-600 hover:text-brand-blue font-medium transition-colors">Facilidades</a>
+                    <a href="#contato" class="text-slate-600 hover:text-brand-blue font-medium transition-colors">Localização</a>
+                    <a href="https://wa.me/551532339502" target="_blank" class="bg-brand-blue hover:bg-brand-darkBlue text-white px-6 py-2.5 rounded-full font-medium transition-all transform hover:scale-105 shadow-md shadow-blue-500/30 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Fale Conosco
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-blue focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col shadow-inner">
+                <a href="#produtos" class="mobile-link block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-blue rounded-md">Produtos</a>
+                <a href="#marcas" class="mobile-link block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-blue rounded-md">Marcas</a>
+                <a href="#facilidades" class="mobile-link block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-blue rounded-md">Facilidades</a>
+                <a href="#contato" class="mobile-link block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-blue rounded-md">Localização</a>
+                <a href="https://wa.me/551532339502" target="_blank" class="block w-full text-center mt-4 bg-brand-blue text-white px-5 py-3 rounded-xl font-medium shadow-md flex justify-center items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> (15) 3233-9502
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section class="relative bg-slate-900 overflow-hidden min-h-[90vh] flex items-center">
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Doces deliciosos" class="w-full h-full object-cover opacity-40">
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div class="max-w-2xl reveal-left">
+                    <span class="inline-block py-1 px-3 rounded-full bg-brand-yellow/20 text-brand-yellow font-semibold text-sm tracking-wider mb-6 border border-brand-yellow/30 uppercase">
+                        A Loja Mais Completa de Sorocaba
+                    </span>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-tight mb-6">
+                        Explore o doce <br/>
+                        <span class="text-brand-yellow">universo</span> da confeitaria.
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed font-light">
+                        Tudo o que você precisa para criar memórias deliciosas. Ingredientes de alta qualidade, artigos para festas e os melhores doces, tudo em um só lugar.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/551532339502" target="_blank" class="group relative inline-flex justify-center items-center gap-3 bg-brand-yellow hover:bg-yellow-400 text-slate-900 text-lg font-semibold py-4 px-8 rounded-full overflow-hidden transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(251,191,36,0.4)]">
+                            <span class="relative z-10 flex items-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-2xl"></i> Fazer Pedido Agora
+                            </span>
+                            <div class="absolute inset-0 h-full w-full bg-white/20 scale-x-0 group-hover:scale-x-100 transform origin-left transition-transform duration-300 ease-out z-0"></div>
+                        </a>
+                        <a href="#produtos" class="inline-flex justify-center items-center text-white border border-white/30 hover:bg-white/10 hover:border-white font-medium py-4 px-8 rounded-full transition-all">
+                            Ver Produtos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating Decorative Element -->
+            <div class="absolute right-10 bottom-10 animate-bounce-slow hidden lg:block opacity-80">
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl flex items-center gap-4 shadow-2xl">
+                    <div class="bg-brand-blue w-12 h-12 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-truck-fast text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-white font-heading font-bold">Entrega Rápida</p>
+                        <p class="text-slate-300 text-sm">Para toda Sorocaba</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="produtos" class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <h2 class="text-brand-blue font-semibold tracking-wide uppercase text-sm mb-2">Nossos Produtos</h2>
+                    <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-900 mb-4">Tudo para sua Festa e Confeitaria</h3>
+                    <p class="text-slate-600">Da matéria-prima aos doces prontos, oferecemos uma enorme variedade de itens para adoçar o seu dia.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Produto 1 -->
+                    <div class="group bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 reveal">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1614088685112-0a760b71a3c8?auto=format&fit=crop&q=80&w=600" alt="Chocolates" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-blue text-xs font-bold px-3 py-1 rounded-full">
+                                Mais Vendido
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-heading font-bold text-xl text-slate-900 mb-2">Chocolates e Coberturas</h4>
+                            <p class="text-slate-600 text-sm mb-4">Barras, gotas, cacau em pó e coberturas fracionadas das melhores marcas.</p>
+                            <a href="https://wa.me/551532339502" target="_blank" class="text-brand-blue font-semibold hover:text-brand-darkBlue inline-flex items-center gap-1 transition-colors">
+                                Consultar Estoque <i class="fa-solid fa-arrow-right text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Produto 2 -->
+                    <div class="group bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 reveal" style="transition-delay: 100ms;">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&q=80&w=600" alt="Artigos de Festa" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-heading font-bold text-xl text-slate-900 mb-2">Artigos para Festas</h4>
+                            <p class="text-slate-600 text-sm mb-4">Balões, forminhas, topos de bolo, embalagens temáticas e muito mais.</p>
+                            <a href="https://wa.me/551532339502" target="_blank" class="text-brand-blue font-semibold hover:text-brand-darkBlue inline-flex items-center gap-1 transition-colors">
+                                Consultar Estoque <i class="fa-solid fa-arrow-right text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Produto 3 -->
+                    <div class="group bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 reveal" style="transition-delay: 200ms;">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&q=80&w=600" alt="Confeitos" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-heading font-bold text-xl text-slate-900 mb-2">Confeitos e Granulados</h4>
+                            <p class="text-slate-600 text-sm mb-4">Cores vibrantes e sabores incríveis para decorar suas criações doces.</p>
+                            <a href="https://wa.me/551532339502" target="_blank" class="text-brand-blue font-semibold hover:text-brand-darkBlue inline-flex items-center gap-1 transition-colors">
+                                Consultar Estoque <i class="fa-solid fa-arrow-right text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Produto 4 -->
+                    <div class="group bg-slate-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 reveal" style="transition-delay: 300ms;">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&q=80&w=600" alt="Utensílios" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-heading font-bold text-xl text-slate-900 mb-2">Utensílios e Formas</h4>
+                            <p class="text-slate-600 text-sm mb-4">Ferramentas profissionais para confeiteiros amadores e especialistas.</p>
+                            <a href="https://wa.me/551532339502" target="_blank" class="text-brand-blue font-semibold hover:text-brand-darkBlue inline-flex items-center gap-1 transition-colors">
+                                Consultar Estoque <i class="fa-solid fa-arrow-right text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center reveal">
+                    <a href="https://wa.me/551532339502" target="_blank" class="inline-flex items-center gap-2 bg-brand-blue text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-darkBlue transition-colors shadow-lg shadow-blue-500/20">
+                        <i class="fa-solid fa-basket-shopping"></i> Solicitar Orçamento Completo
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="marcas" class="py-16 bg-slate-50 border-y border-slate-200 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+                <p class="text-sm font-semibold text-slate-500 uppercase tracking-widest mb-8">Trabalhamos com as melhores marcas</p>
+                
+                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                    <h2 class="text-2xl md:text-3xl font-heading font-black text-slate-800 tracking-tighter">Mil Cores</h2>
+                    <h2 class="text-2xl md:text-3xl font-heading font-black text-slate-800 tracking-tighter"><i class="fa-solid fa-candy-cane text-brand-yellow mr-1"></i>Garoto</h2>
+                    <h2 class="text-2xl md:text-3xl font-heading font-black text-slate-800 tracking-tighter">Mavalério</h2>
+                    <h2 class="text-2xl md:text-3xl font-heading font-black text-slate-800 tracking-tighter">MAGO<i class="fa-solid fa-star text-brand-blue text-sm ml-1 relative -top-3"></i></h2>
+                </div>
+            </div>
+        </section>
+
+        <section id="facilidades" class="py-24 bg-white relative">
+            <div class="absolute top-0 left-0 w-64 h-64 bg-brand-lightYellow rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col lg:flex-row gap-16 items-center">
+                    
+                    <div class="lg:w-1/2 reveal-left">
+                        <h2 class="text-brand-blue font-semibold tracking-wide uppercase text-sm mb-2">Por que escolher a DoceArt</h2>
+                        <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-900 mb-6">Conforto e facilidade para a sua experiência.</h3>
+                        <p class="text-slate-600 mb-8 leading-relaxed">
+                            Pensamos em cada detalhe para que sua visita seja perfeita. Desde o estacionamento até as formas de pagamento, nossa estrutura é montada para o seu bem-estar e praticidade.
+                        </p>
+                        
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <!-- Info Item -->
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-wheelchair text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-slate-900">Acessibilidade Total</h5>
+                                    <p class="text-sm text-slate-600 mt-1">Entrada e estacionamento adaptados para cadeirantes.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Info Item -->
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-slate-900">Opções de Serviço</h5>
+                                    <p class="text-sm text-slate-600 mt-1">Entrega rápida ou retirada diretamente na loja.</p>
+                                </div>
+                            </div>
+
+                            <!-- Info Item -->
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-regular fa-credit-card text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-slate-900">Pagamentos</h5>
+                                    <p class="text-sm text-slate-600 mt-1">Crédito, débito e pagamento por aproximação (NFC).</p>
+                                </div>
+                            </div>
+
+                            <!-- Info Item -->
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-car text-xl"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-slate-900">Estacionamento</h5>
+                                    <p class="text-sm text-slate-600 mt-1">Amplo estacionamento descoberto gratuito para clientes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-1/2 w-full reveal-right">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 p-8 sm:p-12 text-white">
+                            <!-- Decorative background -->
+                            <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-brand-blue opacity-20 blur-2xl"></div>
+                            
+                            <h4 class="text-2xl font-heading font-bold mb-6 text-brand-yellow">Planeje sua visita</h4>
+                            
+                            <ul class="space-y-6">
+                                <li class="flex items-start gap-4">
+                                    <i class="fa-regular fa-clock text-brand-yellow text-xl mt-1"></i>
+                                    <div>
+                                        <p class="font-bold text-lg mb-1">Horário de Funcionamento</p>
+                                        <p class="text-slate-300">Segunda a Sexta: 09:00 às 18:00</p>
+                                        <p class="text-slate-300">Sábado: 09:00 às 13:00</p>
+                                        <p class="text-red-400 font-medium mt-1">Domingo: Fechado</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <i class="fa-solid fa-bolt text-brand-yellow text-xl mt-1"></i>
+                                    <div>
+                                        <p class="font-bold text-lg mb-1">Visita Rápida</p>
+                                        <p class="text-slate-300">Organização otimizada para quem precisa comprar rápido e voltar para a produção de doces.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <a href="https://wa.me/551532339502" target="_blank" class="mt-8 block w-full bg-white text-slate-900 text-center py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors">
+                                Tirar Dúvidas no WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-24 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <h2 class="text-brand-blue font-semibold tracking-wide uppercase text-sm mb-2">Localização</h2>
+                    <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-900 mb-4">Venha nos visitar</h3>
+                    <p class="text-slate-600 text-lg">
+                        R. Santa Rosália, 86 - Além Linha, Sorocaba - SP, 18095-040
+                    </p>
+                </div>
+
+                <div class="rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-[450px] w-full reveal bg-slate-200 relative group">
+                    <!-- Loading overlay for iframe -->
+                    <div class="absolute inset-0 flex items-center justify-center bg-slate-100 -z-10">
+                        <i class="fa-solid fa-spinner fa-spin text-4xl text-brand-blue"></i>
+                    </div>
+                    
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.749021955364!2d-47.4526673!3d-23.4916327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c58aa1197baeb1%3A0x63428fb17dc40149!2sR.%20Santa%20Ros%C3%A1lia%2C%2086%20-%20Vila%20Santana%2C%20Sorocaba%20-%20SP%2C%2018095-040!5e0!3m2!1sen!2sbr!4v1715000000000!5m2!1sen!2sbr" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full h-full z-10 relative">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-white pt-16 pb-8 border-t-[6px] border-brand-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="reveal">
+                    <div class="flex items-center mb-6">
+                        <i class="fa-solid fa-cake-candles text-brand-yellow text-2xl mr-2"></i>
+                        <span class="font-heading font-bold text-3xl tracking-tight text-white">Doce<span class="text-brand-yellow">Art</span></span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        O seu universo completo de confeitaria e artigos para festas. Qualidade, preço justo e o melhor atendimento de Sorocaba.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-blue hover:text-white transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-blue hover:text-white transition-colors">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/551532339502" target="_blank" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-green-500 hover:text-white transition-colors">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="reveal" style="transition-delay: 100ms;">
+                    <h4 class="font-heading font-bold text-lg mb-6 text-white">Navegação</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#produtos" class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs"></i> Produtos</a></li>
+                        <li><a href="#marcas" class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs"></i> Marcas Parceiras</a></li>
+                        <li><a href="#facilidades" class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs"></i> Facilidades</a></li>
+                        <li><a href="#contato" class="text-slate-400 hover:text-brand-yellow transition-colors flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs"></i> Localização</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <h4 class="font-heading font-bold text-lg mb-6 text-white">Contato</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-yellow"></i>
+                            <span class="text-slate-400">R. Santa Rosália, 86 - Além Linha<br>Sorocaba - SP, 18095-040</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-brand-yellow"></i>
+                            <a href="https://wa.me/551532339502" target="_blank" class="text-slate-400 hover:text-brand-yellow transition-colors">(15) 3233-9502</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-regular fa-clock text-brand-yellow"></i>
+                            <span class="text-slate-400">Seg-Sex: 09h às 18h | Sáb: 09h às 13h</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 reveal">
+                <p>&copy; 2026 DoceArt - Todos os direitos reservados. Demonstração</p>
+                <p class="mt-2 md:mt-0 flex items-center gap-1"></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Header Scroll Effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    header.classList.add('shadow-md');
+                    header.classList.replace('bg-transparent', 'bg-white/90');
+                } else {
+                    header.classList.remove('shadow-md');
+                    header.classList.replace('bg-white/90', 'bg-transparent');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                // Change icon
+                const icon = btn.querySelector('i');
+                if(menu.classList.contains('hidden')){
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Close mobile menu on link click
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    btn.querySelector('i').classList.remove('fa-xmark');
+                    btn.querySelector('i').classList.add('fa-bars');
+                });
+            });
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
